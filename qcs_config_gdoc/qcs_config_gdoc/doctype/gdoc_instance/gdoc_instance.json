@@ -1,0 +1,105 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:INS-{#####}",
+ "creation": "2025-03-13 13:03:29.210960",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "processor_id",
+  "project_id",
+  "authentication_file",
+  "column_break_aikb",
+  "region",
+  "description",
+  "authentication_file_path",
+  "generated_sample_section",
+  "sample"
+ ],
+ "fields": [
+  {
+   "fieldname": "authentication_file",
+   "fieldtype": "Link",
+   "label": "Authentication File",
+   "options": "Gdoc Authentication",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_aikb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "processor.project_name",
+   "fieldname": "project_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Project ID",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "region",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Region",
+   "options": "eu\nus",
+   "reqd": 1
+  },
+  {
+   "fieldname": "generated_sample_section",
+   "fieldtype": "Section Break",
+   "label": "Generated Sample Call"
+  },
+  {
+   "fieldname": "sample",
+   "fieldtype": "Text",
+   "label": "Sample"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Description"
+  },
+  {
+   "fetch_from": "authentication_file.application_credentials",
+   "fieldname": "authentication_file_path",
+   "fieldtype": "Data",
+   "label": "Authentication File Path",
+   "read_only": 1
+  },
+  {
+   "fieldname": "processor_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Processor ID",
+   "options": "Gdoc Processor",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-03-14 11:23:00.510408",
+ "modified_by": "Administrator",
+ "module": "Qcs Config Gdoc",
+ "name": "Gdoc Instance",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
