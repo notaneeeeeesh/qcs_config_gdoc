@@ -11,14 +11,16 @@
   "column_break_dupq",
   "project_parent",
   "project_name",
-  "region"
+  "region",
+  "section_break_cwsd",
+  "table_mhhx"
  ],
  "fields": [
   {
    "fieldname": "processor_id",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Processor Id",
+   "label": "Classifier Id",
    "reqd": 1,
    "unique": 1
   },
@@ -45,23 +47,31 @@
    "fieldname": "processor_name",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Processor Name",
+   "label": "Classifier Name",
    "reqd": 1
   },
   {
    "fieldname": "region",
    "fieldtype": "Select",
    "label": "Region",
-   "options": "eu\nus",
-   "reqd": 1
+   "options": "eu\nus"
+  },
+  {
+   "fieldname": "section_break_cwsd",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "table_mhhx",
+   "fieldtype": "Table",
+   "options": "Gdoc Classifier Labels"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-04-11 13:39:15.534153",
+ "modified": "2025-04-11 13:52:37.133848",
  "modified_by": "Administrator",
  "module": "Qcs Config Gdoc",
- "name": "Gdoc Processor",
+ "name": "Gdoc Classifier",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [

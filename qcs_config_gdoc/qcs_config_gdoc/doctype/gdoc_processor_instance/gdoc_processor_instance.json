@@ -29,20 +29,19 @@
    "fieldtype": "Column Break"
   },
   {
-   "fetch_from": "processor.project_name",
+   "fetch_from": "processor_id.project_name",
    "fieldname": "project_id",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Project ID",
-   "read_only": 1,
-   "reqd": 1
+   "read_only": 1
   },
   {
+   "fetch_from": "processor_id.region",
    "fieldname": "region",
-   "fieldtype": "Select",
+   "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Region",
-   "options": "eu\nus",
    "reqd": 1
   },
   {
@@ -53,7 +52,8 @@
   {
    "fieldname": "sample",
    "fieldtype": "Text",
-   "label": "Sample"
+   "label": "Sample",
+   "read_only": 1
   },
   {
    "fieldname": "description",
@@ -79,10 +79,10 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-14 11:23:00.510408",
+ "modified": "2025-04-11 13:42:19.640088",
  "modified_by": "Administrator",
  "module": "Qcs Config Gdoc",
- "name": "Gdoc Instance",
+ "name": "Gdoc Processor Instance",
  "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [

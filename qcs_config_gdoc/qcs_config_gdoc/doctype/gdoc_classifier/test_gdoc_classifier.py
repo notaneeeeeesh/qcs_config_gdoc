@@ -12,18 +12,18 @@ EXTRA_TEST_RECORD_DEPENDENCIES = []  # eg. ["User"]
 IGNORE_TEST_RECORD_DEPENDENCIES = []  # eg. ["User"]
 
 
-class UnitTestGdocInstance(UnitTestCase):
+class UnitTestGdocClassifier(UnitTestCase):
 	"""
-	Unit tests for GdocInstance.
+	Unit tests for GdocClassifier.
 	Use this class for testing individual functions and methods.
 	"""
 
 	pass
 
 
-class IntegrationTestGdocInstance(IntegrationTestCase):
+class IntegrationTestGdocClassifier(IntegrationTestCase):
 	"""
-	Integration tests for GdocInstance.
+	Integration tests for GdocClassifier.
 	Use this class for testing interactions between multiple components.
 	"""
 

@@ -5,7 +5,7 @@
 from frappe.model.document import Document
 
 
-class GdocInstance(Document):
+class GdocProcessorInstance(Document):
     def on_update(self):
         self.sample = f'''import frappe
 import json
