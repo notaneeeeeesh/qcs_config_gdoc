@@ -1,13 +1,13 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:processor_id",
+ "autoname": "field:classifier_id",
  "creation": "2025-03-13 12:59:23.666416",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "processor_id",
-  "processor_name",
+  "classifier_id",
+  "classifier_name",
   "column_break_dupq",
   "project_parent",
   "project_name",
@@ -16,14 +16,6 @@
   "table_mhhx"
  ],
  "fields": [
-  {
-   "fieldname": "processor_id",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Classifier Id",
-   "reqd": 1,
-   "unique": 1
-  },
   {
    "fieldname": "column_break_dupq",
    "fieldtype": "Column Break"
@@ -44,13 +36,6 @@
    "read_only": 1
   },
   {
-   "fieldname": "processor_name",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Classifier Name",
-   "reqd": 1
-  },
-  {
    "fieldname": "region",
    "fieldtype": "Select",
    "label": "Region",
@@ -63,12 +48,28 @@
   {
    "fieldname": "table_mhhx",
    "fieldtype": "Table",
+   "label": "Labels",
    "options": "Gdoc Classifier Labels"
+  },
+  {
+   "fieldname": "classifier_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Classifier Id",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "classifier_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Classifier Name",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-04-11 13:52:37.133848",
+ "modified": "2025-04-11 15:42:42.879526",
  "modified_by": "Administrator",
  "module": "Qcs Config Gdoc",
  "name": "Gdoc Classifier",
@@ -91,5 +92,5 @@
  "sort_field": "creation",
  "sort_order": "DESC",
  "states": [],
- "title_field": "processor_name"
+ "title_field": "classifier_name"
 }

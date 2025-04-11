@@ -6,7 +6,9 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "instance_name",
   "processor_id",
+  "processor_name",
   "project_id",
   "authentication_file",
   "column_break_aikb",
@@ -52,8 +54,7 @@
   {
    "fieldname": "sample",
    "fieldtype": "Text",
-   "label": "Sample",
-   "read_only": 1
+   "label": "Sample"
   },
   {
    "fieldname": "description",
@@ -75,11 +76,25 @@
    "label": "Processor ID",
    "options": "Gdoc Processor",
    "reqd": 1
+  },
+  {
+   "fieldname": "instance_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Instance Name",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "processor_id.processor_name",
+   "fieldname": "processor_name",
+   "fieldtype": "Data",
+   "label": "Processor Name",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-04-11 13:42:19.640088",
+ "modified": "2025-04-11 15:59:02.138953",
  "modified_by": "Administrator",
  "module": "Qcs Config Gdoc",
  "name": "Gdoc Processor Instance",
@@ -101,5 +116,6 @@
  ],
  "sort_field": "creation",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "instance_name"
 }
