@@ -15,6 +15,7 @@
   "region",
   "description",
   "authentication_file_path",
+  "reference_doctype",
   "generated_sample_section",
   "sample"
  ],
@@ -90,11 +91,18 @@
    "fieldtype": "Data",
    "label": "Processor Name",
    "read_only": 1
+  },
+  {
+   "fieldname": "reference_doctype",
+   "fieldtype": "Link",
+   "label": "Reference DocType",
+   "options": "DocType",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-04-11 15:59:02.138953",
+ "modified": "2025-04-11 23:32:44.432101",
  "modified_by": "Administrator",
  "module": "Qcs Config Gdoc",
  "name": "Gdoc Processor Instance",
