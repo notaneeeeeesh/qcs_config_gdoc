@@ -12,14 +12,14 @@
    "fieldname": "project_name",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Project Name",
+   "label": "Project ID",
    "reqd": 1,
    "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-13 13:29:50.400272",
+ "modified": "2025-04-16 19:49:38.479120",
  "modified_by": "Administrator",
  "module": "Qcs Config Gdoc",
  "name": "Gdoc Project",

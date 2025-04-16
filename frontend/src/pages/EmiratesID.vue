@@ -1,8 +1,10 @@
 <template>
     <div>
-        <div>
-            <Select v-if="instanceLabels.length != 0" :options=instanceLabels v-model="selectedInstance"
-                placeholder="Select a Processor Instance" />
+        <div class="p-5">
+            <div class="w-fit">
+                <Select v-if="instanceLabels.length != 0" :options=instanceLabels v-model="selectedInstance"
+                    placeholder="Select a Processor Instance" />
+            </div>
             <h1 class="container">Upload Image</h1>
             <div>
                 <div class="file-container">
@@ -18,9 +20,9 @@
                 </div>
                 <button v-if="selectedInstance" class="bg-gray-500 rounded-2xl px-5 mt-2"
                     @click="handleSend">Send?</button>
-                <button class="bg-gray-500 rounded-2xl px-5 mt-2" @click="printData">Print</button>
+                <!-- <button class="bg-gray-500 rounded-2xl px-5 mt-2" @click="printData">Print</button> -->
                 <div>
-                    <h1 v-if="flags.mismatch" class="bg-red-600">WARNING: MISMATCHING FIELD NAMES BETWEEN DOCTYPE AND PROCESSOR FIELDS</h1>
+                    <!-- <h1 v-if="flags.mismatch" class="bg-red-600">WARNING: MISMATCHING FIELD NAMES BETWEEN DOCTYPE AND PROCESSOR FIELDS</h1> -->
                     <div v-if="unsavedProcessedData" class="flex flex-wrap gap-5">
                         <div v-for="(value, field) in unsavedProcessedData" :key="field">
                             <p>{{ field }}</p>
@@ -29,7 +31,9 @@
                     </div>
                     <button class="bg-red-300 rounded-2xl px-5 mt-5" v-if="processedData"
                         @click="saveEntries">Save?</button>
-                    <button class="bg-red-300 rounded-2xl px-5 mt-5" v-if="processedData && !flags.mismatch"
+                    <!-- <button class="bg-red-300 rounded-2xl px-5 mt-5" v-if="processedData && !flags.mismatch"
+                        @click="handleSubmit">Submit?</button> -->
+                    <button class="bg-red-300 rounded-2xl px-5 mt-5" v-if="processedData"
                         @click="handleSubmit">Submit?</button>
                 </div>
             </div>
@@ -51,7 +55,8 @@ const flags = reactive({
     mismatch: false,
     doctype: "doctype"
 })
- 
+
+const selectedDoctype = ref("DocType")
 
 const instanceLabels = ref([])
 const instanceList = createResource({
@@ -64,14 +69,14 @@ const processorLabels = ref()
 instanceList.promise.then(() => setInstanceLabels())
 
 const setInstanceLabels = () => {
-    console.log(instanceList.data)
+    // console.log(instanceList.data)
     instanceList.data.map((instance) => {
         instanceLabels.value.push({
             'label': instance.instance_name,
             'value': instance.name
         })
     })
-    console.log(instanceLabels.value)
+    // console.log(instanceLabels.value)
 }
 
 const processedDataKeys = ref()
@@ -105,16 +110,16 @@ const handleSend = () => {
         flags.mismatch = false
         processedData.value = data
         processedDataKeys.value = Object.keys(processedData.value)
-        console.log(processedDataKeys.value.sort())
+        // console.log(processedDataKeys.value.sort())
         unsavedProcessedDataKeys.value = Object.keys(unsavedProcessedData.value)
-        console.log(unsavedProcessedDataKeys.value.sort())
-        if(JSON.stringify(processedDataKeys.value) !== JSON.stringify(unsavedProcessedDataKeys.value)){ 
-            flags.mismatch = true 
+        // console.log(unsavedProcessedDataKeys.value.sort())
+        if (JSON.stringify(processedDataKeys.value) !== JSON.stringify(unsavedProcessedDataKeys.value)) {
+            flags.mismatch = true
         }
         processedDataKeys.value.map((key) => {
             unsavedProcessedData.value[key] = processedData.value[key]
         })
-        console.log(unsavedProcessedData.value)
+        // console.log(unsavedProcessedData.value)
     })
 }
 
@@ -123,18 +128,20 @@ const handleSubmit = () => {
         console.log("empty");
         return
     }
-    docResource.insert.submit(unsavedProcessedData.value)
-    console.log("submitting")
+    docResource.insert.submit(unsavedProcessedData.value).then((d) => {
+        console.log(d)
+    })
+
 }
 
-const printData = () => {
-    console.log("Image Data:")
-    console.log(imageData.value)
-    console.log("Receive Data:")
-    console.log(processedData.value)
-    console.log("Unsaved Data:")
-    console.log(unsavedProcessedData.value)
-}
+// const printData = () => {
+//     console.log("Image Data:")
+//     console.log(imageData.value)
+//     console.log("Receive Data:")
+//     console.log(processedData.value)
+//     console.log("Unsaved Data:")
+//     console.log(unsavedProcessedData.value)
+// }
 
 const saveEntries = () => {
     console.log("Saved!")
@@ -144,10 +151,10 @@ const sendImage = createResource({
     url: 'qcs_config_gdoc.api.processors.getProc'
 })
 
-const testResource = createResource({
-    url: 'qcs_config_gdoc.api.utils.test',
-    auto: true
-})
+// const testResource = createResource({
+//     url: 'qcs_config_gdoc.api.utils.test',
+//     auto: true
+// })
 
 const fieldsResource = createResource({
     url: 'qcs_config_gdoc.api.utils.getFieldsByInstance'
@@ -161,13 +168,16 @@ watch(selectedInstance, () => {
             unsavedProcessedData.value[label.fieldname] = ""
             // console.log(label.fieldname)
         })
-        flags.doctype = fieldsResource.data.reference
-        console.log(unsavedProcessedData.value)
+
+        selectedDoctype.value = fieldsResource.data.reference
+        docResource.update({ doctype: selectedDoctype.value })
+        docResource.reload()
+        // console.log(unsavedProcessedData.value)
     })
 })
 
 const docResource = createListResource({
-    doctype: flags.doctype,
+    doctype: selectedDoctype.value,
     fields: ["*"],
     auto: false
 })

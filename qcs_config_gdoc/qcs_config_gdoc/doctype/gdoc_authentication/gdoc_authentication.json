@@ -12,13 +12,13 @@
    "fieldname": "application_credentials",
    "fieldtype": "Attach",
    "in_list_view": 1,
-   "label": "Application Credentials",
+   "label": "Google Authentication JSON File",
    "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-13 13:29:57.353652",
+ "modified": "2025-04-12 12:11:56.532199",
  "modified_by": "Administrator",
  "module": "Qcs Config Gdoc",
  "name": "Gdoc Authentication",
