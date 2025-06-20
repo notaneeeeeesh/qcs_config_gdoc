@@ -5,12 +5,14 @@
                 <Select v-if="instanceLabels.length != 0" :options=instanceLabels v-model="selectedInstance"
                     placeholder="Select a Processor Instance" />
             </div>
-            <h1 class="container">Upload Image</h1>
+            <div>
+                <h1 class="container">Upload Image</h1>
+            </div>
             <div>
                 <div class="file-container">
                     <div>
                         <form>
-                            <input type="file" id="media" accept="image/png"
+                            <input type="file" id="media" accept="image/png, image/jpeg"
                                 @change="(event) => handleFileUpload(event)" />
                         </form>
                     </div>
@@ -18,8 +20,10 @@
                 <div>
                     <img v-if="renderImage" :src="renderImage">
                 </div>
-                <button v-if="selectedInstance" class="bg-gray-500 rounded-2xl px-5 mt-2"
-                    @click="handleSend">Send?</button>
+                <button v-if="selectedInstance && imageData.content" class="bg-gray-500 rounded-2xl px-5 mt-2"
+                    @click="handleSend">Send1?</button>
+                <button v-if="imageData.content && !selectedInstance" class="bg-gray-500 rounded-2xl px-5 mt-2"
+                    @click="handleSend">Send2?</button>
                 <!-- <button class="bg-gray-500 rounded-2xl px-5 mt-2" @click="printData">Print</button> -->
                 <div>
                     <!-- <h1 v-if="flags.mismatch" class="bg-red-600">WARNING: MISMATCHING FIELD NAMES BETWEEN DOCTYPE AND PROCESSOR FIELDS</h1> -->
@@ -69,14 +73,12 @@ const processorLabels = ref()
 instanceList.promise.then(() => setInstanceLabels())
 
 const setInstanceLabels = () => {
-    // console.log(instanceList.data)
     instanceList.data.map((instance) => {
         instanceLabels.value.push({
             'label': instance.instance_name,
             'value': instance.name
         })
     })
-    // console.log(instanceLabels.value)
 }
 
 const processedDataKeys = ref()
@@ -103,24 +105,45 @@ const handleFileUpload = (e) => {
 };
 
 const handleSend = () => {
-    sendImage.submit({
-        str: imageData.value,
-        instanceName: selectedInstance.value
-    },).then((data) => {
-        flags.mismatch = false
-        processedData.value = data
-        processedDataKeys.value = Object.keys(processedData.value)
-        // console.log(processedDataKeys.value.sort())
-        unsavedProcessedDataKeys.value = Object.keys(unsavedProcessedData.value)
-        // console.log(unsavedProcessedDataKeys.value.sort())
-        if (JSON.stringify(processedDataKeys.value) !== JSON.stringify(unsavedProcessedDataKeys.value)) {
-            flags.mismatch = true
-        }
-        processedDataKeys.value.map((key) => {
-            unsavedProcessedData.value[key] = processedData.value[key]
+    if (selectedInstance.value) {
+        sendImageToProcessor.submit({
+            str: imageData.value,
+            instanceName: selectedInstance.value
+        },).then((data) => {
+            flags.mismatch = false
+            processedData.value = data
+            processedDataKeys.value = Object.keys(processedData.value)
+            unsavedProcessedDataKeys.value = Object.keys(unsavedProcessedData.value)
+            if (JSON.stringify(processedDataKeys.value) !== JSON.stringify(unsavedProcessedDataKeys.value)) {
+                flags.mismatch = true
+            }
+            processedDataKeys.value.map((key) => {
+                unsavedProcessedData.value[key] = processedData.value[key]
+            })
         })
-        // console.log(unsavedProcessedData.value)
-    })
+    }
+    else {
+        sendImageToClassifier.submit({
+            str: imageData.value
+        },).then((returnData) => {
+            flags.mismatch = false
+            console.log(returnData)
+            selectedDoctype.value = returnData.doctype
+            docResource.update({ doctype: selectedDoctype.value })
+            docResource.reload()
+            console.log(selectedDoctype.value)
+            processedData.value = returnData.data
+            processedDataKeys.value = Object.keys(processedData.value)
+            unsavedProcessedDataKeys.value = Object.keys(unsavedProcessedData.value)
+            if (JSON.stringify(processedDataKeys.value) !== JSON.stringify(unsavedProcessedDataKeys.value)) {
+                flags.mismatch = true
+            }
+            processedDataKeys.value.map((key) => {
+                unsavedProcessedData.value[key] = processedData.value[key]
+            })
+            console.log(unsavedProcessedData.value)
+        })
+    }
 }
 
 const handleSubmit = () => {
@@ -128,10 +151,11 @@ const handleSubmit = () => {
         console.log("empty");
         return
     }
+    console.log(selectedDoctype.value)
     docResource.insert.submit(unsavedProcessedData.value).then((d) => {
         console.log(d)
+        console.log("Submitted!")
     })
-
 }
 
 // const printData = () => {
@@ -147,14 +171,13 @@ const saveEntries = () => {
     console.log("Saved!")
 }
 
-const sendImage = createResource({
+const sendImageToProcessor = createResource({
     url: 'qcs_config_gdoc.api.processors.getProc'
 })
 
-// const testResource = createResource({
-//     url: 'qcs_config_gdoc.api.utils.test',
-//     auto: true
-// })
+const sendImageToClassifier = createResource({
+    url: 'qcs_config_gdoc.api.processors.getClassifier'
+})
 
 const fieldsResource = createResource({
     url: 'qcs_config_gdoc.api.utils.getFieldsByInstance'
@@ -166,13 +189,11 @@ watch(selectedInstance, () => {
         processorLabels.value = fieldsResource.data.fields
         processorLabels.value.map((label) => {
             unsavedProcessedData.value[label.fieldname] = ""
-            // console.log(label.fieldname)
         })
 
         selectedDoctype.value = fieldsResource.data.reference
         docResource.update({ doctype: selectedDoctype.value })
         docResource.reload()
-        // console.log(unsavedProcessedData.value)
     })
 })
 

@@ -3,11 +3,11 @@ import { session } from './data/session'
 import { userResource } from '@/data/user'
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: () => import('@/pages/Home.vue'),
-  },
+  // {
+  //   path: '/',
+  //   name: 'Home',
+  //   component: () => import('@/pages/Home.vue'),
+  // },
   {
     name: 'Login',
     path: '/account/login',
@@ -15,13 +15,13 @@ const routes = [
   },
   {
     name: 'EmiratesID',
-    path: '/eid',
-    component: () => import('@/pages/EmiratesID.vue'),
+    path: '/',
+    component: () => import('@/pages/ProcessorPage.vue'),
   }
 ]
 
 let router = createRouter({
-  history: createWebHistory('/frontend'),
+  history: createWebHistory('/gdoc'),
   routes,
 })
 

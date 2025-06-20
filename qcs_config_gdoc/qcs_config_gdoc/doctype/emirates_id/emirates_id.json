@@ -1,0 +1,139 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2025-01-29 13:55:56.291043",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "id",
+  "full_name_en",
+  "date_of_birth",
+  "date_issue",
+  "date_expiry",
+  "nationality_en",
+  "occupation_en",
+  "card_number",
+  "employer_en",
+  "column_break_rcgo",
+  "full_name_ar",
+  "nationality_ar",
+  "occupation_ar",
+  "employer_ar",
+  "scan_number",
+  "place_of_issue_en",
+  "place_of_issue_ar"
+ ],
+ "fields": [
+  {
+   "fieldname": "id",
+   "fieldtype": "Data",
+   "label": "Emirates ID number"
+  },
+  {
+   "fieldname": "full_name_en",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Full Name English"
+  },
+  {
+   "fieldname": "date_of_birth",
+   "fieldtype": "Data",
+   "label": "Date Of Birth"
+  },
+  {
+   "fieldname": "date_issue",
+   "fieldtype": "Data",
+   "label": "Issue Date"
+  },
+  {
+   "fieldname": "date_expiry",
+   "fieldtype": "Data",
+   "label": "Expiry Date"
+  },
+  {
+   "fieldname": "nationality_en",
+   "fieldtype": "Data",
+   "label": "Nationality English"
+  },
+  {
+   "fieldname": "occupation_en",
+   "fieldtype": "Data",
+   "label": "Occupation English"
+  },
+  {
+   "fieldname": "card_number",
+   "fieldtype": "Data",
+   "label": "Card Number"
+  },
+  {
+   "fieldname": "employer_en",
+   "fieldtype": "Data",
+   "label": "Employer English"
+  },
+  {
+   "fieldname": "column_break_rcgo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "full_name_ar",
+   "fieldtype": "Data",
+   "label": "Full Name Arabic"
+  },
+  {
+   "fieldname": "nationality_ar",
+   "fieldtype": "Data",
+   "label": "Nationality Arabic"
+  },
+  {
+   "fieldname": "occupation_ar",
+   "fieldtype": "Data",
+   "label": "Occupation Arabic"
+  },
+  {
+   "fieldname": "employer_ar",
+   "fieldtype": "Data",
+   "label": "Employer Arabic"
+  },
+  {
+   "fieldname": "scan_number",
+   "fieldtype": "Data",
+   "label": "Chip Number"
+  },
+  {
+   "fieldname": "place_of_issue_en",
+   "fieldtype": "Data",
+   "label": "Place Of Issue English"
+  },
+  {
+   "fieldname": "place_of_issue_ar",
+   "fieldtype": "Data",
+   "label": "Place Of Issue Arabic"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-06-20 13:52:17.955587",
+ "modified_by": "Administrator",
+ "module": "Qcs Config Gdoc",
+ "name": "Emirates ID",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "id"
+}

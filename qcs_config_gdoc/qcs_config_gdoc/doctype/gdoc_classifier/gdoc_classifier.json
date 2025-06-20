@@ -1,19 +1,21 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:classifier_id",
+ "autoname": "hash",
  "creation": "2025-03-13 12:59:23.666416",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "classifier_id",
   "classifier_name",
+  "classifier_id",
   "column_break_dupq",
   "project_parent",
   "project_name",
   "region",
+  "authentication_file",
+  "authentication_file_path",
   "section_break_cwsd",
-  "table_mhhx"
+  "labels"
  ],
  "fields": [
   {
@@ -28,14 +30,6 @@
    "reqd": 1
   },
   {
-   "fetch_from": "project_parent.project_name",
-   "fieldname": "project_name",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Project name",
-   "read_only": 1
-  },
-  {
    "fieldname": "region",
    "fieldtype": "Select",
    "label": "Region",
@@ -46,18 +40,12 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "table_mhhx",
-   "fieldtype": "Table",
-   "label": "Labels",
-   "options": "Gdoc Classifier Labels"
-  },
-  {
    "fieldname": "classifier_id",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Classifier Id",
-   "reqd": 1,
-   "unique": 1
+   "in_preview": 1,
+   "label": "Classifier ID",
+   "reqd": 1
   },
   {
    "fieldname": "classifier_name",
@@ -65,15 +53,42 @@
    "in_list_view": 1,
    "label": "Classifier Name",
    "reqd": 1
+  },
+  {
+   "fetch_from": "project_parent.project_name",
+   "fieldname": "project_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Project name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "authentication_file",
+   "fieldtype": "Link",
+   "label": "Authentication File",
+   "options": "Gdoc Authentication",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "authentication_file.application_credentials",
+   "fieldname": "authentication_file_path",
+   "fieldtype": "Data",
+   "label": "Authentication File Path"
+  },
+  {
+   "fieldname": "labels",
+   "fieldtype": "Table",
+   "label": "Labels",
+   "options": "Gdoc Classifier Labels"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-04-11 15:42:42.879526",
+ "modified": "2025-06-20 17:13:56.176618",
  "modified_by": "Administrator",
  "module": "Qcs Config Gdoc",
  "name": "Gdoc Classifier",
- "naming_rule": "By fieldname",
+ "naming_rule": "Random",
  "owner": "Administrator",
  "permissions": [
   {
