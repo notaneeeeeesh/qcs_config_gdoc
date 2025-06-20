@@ -113,7 +113,7 @@ def callClassifier(project_id,location,processor_id,authentication,image,mime):
     #     arr.append(f'"{entity.type}":"{entity.confidence}"')
     # finalStr = '{' + ",".join(arr) + '}'
     # data = json.loads(finalStr)
-    # print(data)
+    # # # print(data)
     data = {'driving_license': '0.004946226719766855', 'emirates_id': '0.9937572479248047', 'invoice': '0.0012965035857632756'}
     res = max(data, key=data.get)
     # print(res)
